@@ -31,7 +31,7 @@ angular.module('app', [])
 
         });
 
-        if (!match.length) return;
+        if (!match || !match.length) return;
 
         (project.environments || []).forEach(function(environment) {
           if (environment.active) return;
