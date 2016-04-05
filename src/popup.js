@@ -19,11 +19,12 @@ angular.module('app', [])
 
       projects.some(function(project){
 
-        var match;
+        var match, regex;
 
         (project.environments || []).some(function(environment){
 
-          if (new RegExp(environment.regex).test(activeTab.url)) {
+          regex = new RegExp(environment.regex)
+          if (regex.test(activeTab.url)) {
             environment.active = true;
             match = activeTab.url.match(environment.regex);
             return true;
@@ -35,7 +36,7 @@ angular.module('app', [])
 
         (project.environments || []).forEach(function(environment) {
           if (environment.active) return;
-          environment.url = activeTab.url.replace(match[0], environment.base);
+          environment.url = activeTab.url.replace(regex, environment.base);
         });
 
         $rootScope.project = project;
