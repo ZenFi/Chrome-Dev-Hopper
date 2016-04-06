@@ -7,14 +7,17 @@
 </head>
 <body id="extension-settings">
 
-<header>
-  <button ng-click="save()" class="right">
+<header class="center">
+  <button ng-click="save()" class="right" ng-hide="showCode">
     Save
     <span class="r">&#x2714;</span>
   </button>
-  <button ng-click="newProject()">
+  <button ng-click="newProject()" class="left" ng-hide="showCode">
     <span class="l">&#10010;</span>
     Add Project
+  </button>
+  <button ng-click="inspect()">
+    &#x1f50d; {{ showCode ? 'GUI' : 'JSON' }}
   </button>
 
   <p class="alert" ng-show="saved">
@@ -22,9 +25,9 @@
   </p>
 </header>
 
+<pre contenteditable ng-show="showCode" ng-model="code"></pre>
 
-
-<ul class="projects">
+<ul class="projects" ng-hide="showCode">
   <li ng-repeat="project in projects">
     <label>
       <input placeholder="Example" ng-model="project.name" required>
